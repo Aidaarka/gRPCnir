@@ -1,0 +1,23 @@
+//python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/test.proto
+
+syntax = "proto3";
+import "google/protobuf/struct.proto";
+
+
+service TestService {
+    rpc upload_data_server (nirRequest) returns (nirReply) {}
+    rpc n_rows_server (nirRequest) returns (nirReply) {}
+    rpc df_info_server (nirRequest) returns (nirReply) {}
+    rpc max_by_col_server (nirRequest) returns (nirReply) {}
+}
+
+message nirRequest {
+    string filename = 1;
+    int32 nrows = 2;
+    string column_name = 3;
+}
+
+message nirReply {
+    google.protobuf.Struct struct_data = 1;
+    string string_message = 2;
+}
